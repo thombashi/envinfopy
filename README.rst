@@ -14,10 +14,6 @@ Summary
     :target: https://coveralls.io/github/thombashi/pyenvinfo?branch=master
     :alt: Test coverage: coveralls
 
-.. image:: https://codecov.io/gh/thombashi/pyenvinfo/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/thombashi/pyenvinfo
-    :alt: Test coverage: codecov
-
 pyenvinfo is a Python Library to get execution environment information.
 
 
