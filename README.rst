@@ -1,62 +1,66 @@
-.. contents:: **project_name**
+.. contents:: **pyenvinfo**
    :backlinks: top
    :depth: 2
 
 
-Python library project template: getting started
-=========================================================
-- Click ``[Use this template]`` button to create a new repository
-- Replace ``project_name`` within the repository to an arbitrary name
-    - ``./rename_to.sh <new_name>``
-- Modify authorized information at ``<project_name>/__version__.py``
-
-
-Related Project
----------------------------------------------------------
-- `thombashi/python-cli-project-template <https://github.com/thombashi/python-cli-project-template>`__
-
-
-********************************************************
-
-README
-
 Summary
 ============================================
 
-.. image:: https://github.com/thombashi/python-lib-project-template/workflows/Tests/badge.svg
-    :target: https://github.com/thombashi/python-lib-project-template/actions?query=workflow%3ATests
+.. image:: https://github.com/thombashi/pyenvinfo/workflows/Tests/badge.svg
+    :target: https://github.com/thombashi/pyenvinfo/actions?query=workflow%3ATests
     :alt: Linux/macOS/Windows CI status
 
-.. image:: https://coveralls.io/repos/github/thombashi/python-lib-project-template/badge.svg?branch=master
-    :target: https://coveralls.io/github/thombashi/python-lib-project-template?branch=master
+.. image:: https://coveralls.io/repos/github/thombashi/pyenvinfo/badge.svg?branch=master
+    :target: https://coveralls.io/github/thombashi/pyenvinfo?branch=master
     :alt: Test coverage: coveralls
 
-.. image:: https://codecov.io/gh/thombashi/python-lib-project-template/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/thombashi/python-lib-project-template
+.. image:: https://codecov.io/gh/thombashi/pyenvinfo/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/thombashi/pyenvinfo
     :alt: Test coverage: codecov
+
+pyenvinfo is a Python Library to get execution environment information.
 
 
 Installation
 ============================================
 ::
 
-    pip install <project_name>
+    pip install pyenvinfo
 
 
 Usage
 ============================================
 
-:Sample Code:
-    .. code-block:: python
+Library usage
+--------------------------------------------
+.. code-block:: python
 
-        # Sample code
+    >>> import pyenvinfo
+    >>> pyenvinfo.get_envinfo(["pyenvinfo"])
+    {'uname': 'Linux ubuntu1804 4.15.0-112-generic x86_64', 'implementation': 'CPython', 'version': '3.8.5', 'pyenvinfo version': '0.0.1'}
 
-:Output:
-    .. code-block::
+Get environment info as Markdown:
 
-        # Output
+.. code-block:: python
+
+    >>> import pyenvinfo
+    >>> print(pyenvinfo.dumps(["pyenvinfo"], "markdown"))
+    - uname: Linux ubuntu1804 4.15.0-112-generic x86_64
+    - CPython version: 3.8.5
+    - pyenvinfo version: 0.0.1
+
+
+CLI usage
+--------------------------------------------
+::
+
+    $ python -m pyenvinfo --packages pyenvinfo
+    uname: Linux ubuntu1804 4.15.0-112-generic x86_64
+    CPython version: 3.8.5
+    pyenvinfo version: 0.0.1
 
 
 Dependencies
 ============================================
 Python 3.5+
+no external dependencies.
