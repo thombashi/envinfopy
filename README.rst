@@ -5,6 +5,17 @@
 
 Summary
 ============================================
+.. image:: https://badge.fury.io/py/pyenvinfo.svg
+    :target: https://badge.fury.io/py/pyenvinfo
+    :alt: PyPI package version
+
+.. image:: https://img.shields.io/pypi/pyversions/pyenvinfo.svg
+    :target: https://pypi.org/project/pyenvinfo
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/pypi/implementation/pyenvinfo.svg
+    :target: https://pypi.org/project/pyenvinfo
+    :alt: Supported Python implementations
 
 .. image:: https://github.com/thombashi/pyenvinfo/workflows/Tests/badge.svg
     :target: https://github.com/thombashi/pyenvinfo/actions?query=workflow%3ATests
