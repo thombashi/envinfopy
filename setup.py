@@ -48,7 +48,6 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=["tests*"]),
     package_data={MODULE_NAME: ["py.typed"]},
     project_urls={
-        "Documentation": "https://{:s}.rtfd.io/".format(MODULE_NAME),
         "Source": REPOSITORY_URL,
         "Tracker": "{:s}/issues".format(REPOSITORY_URL),
     },
