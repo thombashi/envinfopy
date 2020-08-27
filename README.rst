@@ -46,7 +46,7 @@ Library usage
     >>> envinfopy.get_envinfo(["envinfopy"])
     {'uname': 'Linux ubuntu1804 4.15.0-112-generic x86_64', 'implementation': 'CPython', 'version': '3.8.5', 'envinfopy version': '0.0.1'}
 
-Get environment info as Markdown:
+Get environment information as Markdown:
 
 .. code-block:: python
 
@@ -61,10 +61,10 @@ CLI usage
 --------------------------------------------
 ::
 
-    $ python -m envinfopy --packages envinfopy
-    uname: Linux ubuntu1804 4.15.0-112-generic x86_64
-    CPython version: 3.8.5
-    envinfopy version: 0.0.1
+    $ python -m envinfopy --packages envinfopy --format markdown
+    - uname: Linux ubuntu1804 4.15.0-112-generic x86_64
+    - CPython version: 3.8.5
+    - envinfopy version: 0.0.2
 
 
 Dependencies
