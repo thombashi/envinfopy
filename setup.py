@@ -41,7 +41,7 @@ setuptools.setup(
     author_email=pkg_info["__email__"],
     description="pyenvinfo is a Python Library to get execution environment information.",
     include_package_data=True,
-    keywords=[""],
+    keywords=["environment", "uname", "version"],
     license=pkg_info["__license__"],
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/x-rst",
