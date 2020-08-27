@@ -39,7 +39,7 @@ setuptools.setup(
     url=REPOSITORY_URL,
     author=pkg_info["__author__"],
     author_email=pkg_info["__email__"],
-    description="pyenvinfo is a Python Library to get execution environment information.",
+    description="envinfopy is a Python Library to get execution environment information.",
     include_package_data=True,
     keywords=["environment", "uname", "version"],
     license=pkg_info["__license__"],
