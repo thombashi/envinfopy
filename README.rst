@@ -1,38 +1,38 @@
-.. contents:: **pyenvinfo**
+.. contents:: **envinfopy**
    :backlinks: top
    :depth: 2
 
 
 Summary
 ============================================
-.. image:: https://badge.fury.io/py/pyenvinfo.svg
-    :target: https://badge.fury.io/py/pyenvinfo
+.. image:: https://badge.fury.io/py/envinfopy.svg
+    :target: https://badge.fury.io/py/envinfopy
     :alt: PyPI package version
 
-.. image:: https://img.shields.io/pypi/pyversions/pyenvinfo.svg
-    :target: https://pypi.org/project/pyenvinfo
+.. image:: https://img.shields.io/pypi/pyversions/envinfopy.svg
+    :target: https://pypi.org/project/envinfopy
     :alt: Supported Python versions
 
-.. image:: https://img.shields.io/pypi/implementation/pyenvinfo.svg
-    :target: https://pypi.org/project/pyenvinfo
+.. image:: https://img.shields.io/pypi/implementation/envinfopy.svg
+    :target: https://pypi.org/project/envinfopy
     :alt: Supported Python implementations
 
-.. image:: https://github.com/thombashi/pyenvinfo/workflows/Tests/badge.svg
-    :target: https://github.com/thombashi/pyenvinfo/actions?query=workflow%3ATests
+.. image:: https://github.com/thombashi/envinfopy/workflows/Tests/badge.svg
+    :target: https://github.com/thombashi/envinfopy/actions?query=workflow%3ATests
     :alt: Linux/macOS/Windows CI status
 
-.. image:: https://coveralls.io/repos/github/thombashi/pyenvinfo/badge.svg?branch=master
-    :target: https://coveralls.io/github/thombashi/pyenvinfo?branch=master
+.. image:: https://coveralls.io/repos/github/thombashi/envinfopy/badge.svg?branch=master
+    :target: https://coveralls.io/github/thombashi/envinfopy?branch=master
     :alt: Test coverage: coveralls
 
-pyenvinfo is a Python Library to get execution environment information.
+envinfopy is a Python Library to get execution environment information.
 
 
 Installation
 ============================================
 ::
 
-    pip install pyenvinfo
+    pip install envinfopy
 
 
 Usage
@@ -42,29 +42,29 @@ Library usage
 --------------------------------------------
 .. code-block:: python
 
-    >>> import pyenvinfo
-    >>> pyenvinfo.get_envinfo(["pyenvinfo"])
-    {'uname': 'Linux ubuntu1804 4.15.0-112-generic x86_64', 'implementation': 'CPython', 'version': '3.8.5', 'pyenvinfo version': '0.0.1'}
+    >>> import envinfopy
+    >>> envinfopy.get_envinfo(["envinfopy"])
+    {'uname': 'Linux ubuntu1804 4.15.0-112-generic x86_64', 'implementation': 'CPython', 'version': '3.8.5', 'envinfopy version': '0.0.1'}
 
 Get environment info as Markdown:
 
 .. code-block:: python
 
-    >>> import pyenvinfo
-    >>> print(pyenvinfo.dumps(["pyenvinfo"], "markdown"))
+    >>> import envinfopy
+    >>> print(envinfopy.dumps(["envinfopy"], "markdown"))
     - uname: Linux ubuntu1804 4.15.0-112-generic x86_64
     - CPython version: 3.8.5
-    - pyenvinfo version: 0.0.1
+    - envinfopy version: 0.0.1
 
 
 CLI usage
 --------------------------------------------
 ::
 
-    $ python -m pyenvinfo --packages pyenvinfo
+    $ python -m envinfopy --packages envinfopy
     uname: Linux ubuntu1804 4.15.0-112-generic x86_64
     CPython version: 3.8.5
-    pyenvinfo version: 0.0.1
+    envinfopy version: 0.0.1
 
 
 Dependencies

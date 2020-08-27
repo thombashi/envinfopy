@@ -4,7 +4,7 @@ from typing import Dict
 import setuptools
 
 
-MODULE_NAME = "pyenvinfo"
+MODULE_NAME = "envinfopy"
 REPOSITORY_URL = "https://github.com/thombashi/{:s}".format(MODULE_NAME)
 REQUIREMENT_DIR = "requirements"
 ENCODING = "utf8"

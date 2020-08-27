@@ -16,7 +16,7 @@ def parse_option() -> argparse.Namespace:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=dedent(
             """\
-            Issue tracker: https://github.com/thombashi/pyenvinfo/issues
+            Issue tracker: https://github.com/thombashi/envinfopy/issues
             """
         ),
     )
@@ -25,10 +25,15 @@ def parse_option() -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "--packages", default="", help="comma-separated packages that extract versions.",
+        "--packages",
+        default="",
+        help="comma-separated packages that extract versions.",
     )
     parser.add_argument(
-        "--format", choices=["text", "markdown"], default="text", help="output format",
+        "--format",
+        choices=["text", "markdown"],
+        default="text",
+        help="output format",
     )
 
     return parser.parse_args()
