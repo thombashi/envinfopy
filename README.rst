@@ -51,20 +51,19 @@ Get environment information as Markdown:
 .. code-block:: python
 
     >>> import envinfopy
-    >>> print(envinfopy.dumps(["envinfopy"], "markdown"))
-    - uname: Linux ubuntu1804 4.15.0-112-generic x86_64
+    >>> print(envinfopy.dumps(["envinfopy"], format="markdown"))
+    - uname: Linux 890563106c7f 4.19.104-microsoft-standard x86_64
     - CPython version: 3.8.5
-    - envinfopy version: 0.0.1
-
+    - envinfopy version: 0.0.4
 
 CLI usage
 --------------------------------------------
 ::
 
-    $ python -m envinfopy --packages envinfopy --format markdown
-    - uname: Linux ubuntu1804 4.15.0-112-generic x86_64
+    $ python3 -m envinfopy --packages envinfopy --format markdown
+    - uname: Linux 890563106c7f 4.19.104-microsoft-standard x86_64
     - CPython version: 3.8.5
-    - envinfopy version: 0.0.2
+    - envinfopy version: 0.0.4
 
 
 Dependencies
