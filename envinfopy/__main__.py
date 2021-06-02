@@ -30,7 +30,7 @@ def parse_option() -> argparse.Namespace:
     )
     parser.add_argument(
         "--format",
-        choices=["text", "markdown"],
+        choices=["text", "markdown", "json"],
         default="text",
         help="output format",
     )

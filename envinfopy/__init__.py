@@ -2,6 +2,7 @@
 .. codeauthor:: Tsuyoshi Hombashi <tsuyoshi.hombashi@gmail.com>
 """
 
+import json
 import platform
 import sys
 from collections import namedtuple
@@ -77,6 +78,10 @@ def _dumps_markdown(envinfo: Dict[str, str]) -> str:
     return writer.dumps()
 
 
+def _dumps_json(envinfo: Dict[str, str]) -> str:
+    return json.dumps(envinfo, indent=4)
+
+
 def dumps(
     packages: Optional[Sequence[str]] = None, format: Optional[str] = None, verbosity_level: int = 0
 ) -> str:
@@ -93,6 +98,8 @@ def dumps(
                     "    pip install envinfopy[markdown]\n",
                     file=sys.stderr,
                 )
+        elif format_name == "json":
+            return _dumps_json(envinfo)
 
     basic_envinfo = _pop_basic_envinfo(envinfo)
     lines = [
