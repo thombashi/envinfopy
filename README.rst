@@ -44,29 +44,41 @@ Library usage
 
     >>> import envinfopy
     >>> envinfopy.get_envinfo(["envinfopy"])
-    {'uname': 'Linux ubuntu1804 4.15.0-112-generic x86_64', 'implementation': 'CPython', 'version': '3.8.5', 'envinfopy version': '0.0.1'}
+    {'uname': 'Linux', 'python_implementation': 'CPython', 'python_version': '3.8.5', 'platform': 'Ubuntu 18.04', 'envinfopy': '0.0.4'}
 
 Get environment information as Markdown:
+
+::
+
+    pip install envinfopy[all]  # install optional dependencies
 
 .. code-block:: python
 
     >>> import envinfopy
     >>> print(envinfopy.dumps(["envinfopy"], format="markdown"))
-    - uname: Linux 890563106c7f 4.19.104-microsoft-standard x86_64
-    - CPython version: 3.8.5
-    - envinfopy version: 0.0.4
+    |  Module   |    Version    |
+    | --------- | ------------- |
+    | uname     | Linux         |
+    | Python    | CPython 3.8.5 |
+    | platform  | Ubuntu 18.04  |
+    | envinfopy | 0.0.4         |
 
 CLI usage
 --------------------------------------------
 ::
 
-    $ python3 -m envinfopy --packages envinfopy --format markdown
-    - uname: Linux 890563106c7f 4.19.104-microsoft-standard x86_64
-    - CPython version: 3.8.5
-    - envinfopy version: 0.0.4
+    $ pip install envinfopy[all]  # install optional dependencies
+
+    $ python -m envinfopy --packages envinfopy,setuptools --format markdown
+    |   Module   |              Version              |
+    | ---------- | --------------------------------- |
+    | uname      | Linux 4.19.104-microsoft-standard |
+    | Python     | CPython 3.8.5                     |
+    | platform   | Ubuntu 18.04                      |
+    | envinfopy  | 0.0.4                             |
+    | setuptools | 57.0.0                            |
 
 
 Dependencies
 ============================================
-Python 3.5+
-no external dependencies.
+Python 3.6+
