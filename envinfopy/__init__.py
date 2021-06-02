@@ -42,12 +42,12 @@ def get_envinfo(packages: Optional[Sequence[str]] = None) -> Dict[str, str]:
 def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None) -> str:
     envinfo = get_envinfo(packages)
     uname = envinfo.pop(Key.UNAME)
-    implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
-    version = envinfo.pop(Key.PYTHON_VERSION)
+    py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
+    py_version = envinfo.pop(Key.PYTHON_VERSION)
 
     lines = [
         f"uname: {uname}",
-        f"{implementation} version: {version}",
+        f"{py_implementation} version: {py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
