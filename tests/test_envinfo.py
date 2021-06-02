@@ -1,5 +1,7 @@
 import re
 
+import pytest
+
 import envinfopy
 from envinfopy import Key
 
@@ -44,8 +46,25 @@ class Test_get_envinfo:
 
 
 class Test_dumps:
-    def test_smoke(self):
-        output = envinfopy.dumps()
+    @pytest.mark.parametrize(
+        ["format"],
+        [
+            ["text"],
+            ["markdown"],
+            ["json"],
+        ],
+    )
+    def test_smoke(self, format):
+        output_v0 = envinfopy.dumps(format=format, verbosity_level=0)
+        assert len(output_v0) > 20
+        assert RE_VERSION.search(output_v0)
 
-        assert len(output) > 20
-        assert RE_VERSION.search(output)
+        output_v1 = envinfopy.dumps(format=format, verbosity_level=1)
+        assert len(output_v1) > 20
+        assert len(output_v1) > len(output_v0)
+        assert RE_VERSION.search(output_v1)
+
+        output_v2 = envinfopy.dumps(format=format, verbosity_level=2)
+        assert len(output_v2) > 20
+        assert len(output_v2) > len(output_v1)
+        assert RE_VERSION.search(output_v2)
