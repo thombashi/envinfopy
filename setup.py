@@ -35,6 +35,8 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 
 markdown_requires = ["pytablewriter>=0.59.0,<2"]
+distro_requires = ["distro<2"]
+all_requires = markdown_requires + distro_requires
 
 setuptools.setup(
     name=MODULE_NAME,
@@ -44,7 +46,7 @@ setuptools.setup(
     author_email=pkg_info["__email__"],
     description="envinfopy is a Python Library to get execution environment information.",
     include_package_data=True,
-    keywords=["environment", "uname", "version"],
+    keywords=["environment", "uname", "version", "markdown"],
     license=pkg_info["__license__"],
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/x-rst",
@@ -57,8 +59,10 @@ setuptools.setup(
     python_requires=">=3.6",
     install_requires=INSTALL_REQUIRES,
     extras_require={
+        "all": all_requires,
+        "distro": distro_requires,
         "markdown": markdown_requires,
-        "test": TESTS_REQUIRES,
+        "test": set(TESTS_REQUIRES + all_requires),
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
