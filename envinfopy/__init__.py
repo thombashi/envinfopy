@@ -4,11 +4,15 @@
 
 import platform
 import sys
+from collections import namedtuple
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
 
 import pkg_resources
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
+
+
+BasicEnvInfo = namedtuple("BasicEnvInfo", "uname py_implementation py_version")
 
 
 class Key:
@@ -52,16 +56,21 @@ def get_envinfo(
     return envinfo
 
 
+def _pop_basic_envinfo(envinfo: Dict[str, str]) -> BasicEnvInfo:
+    return BasicEnvInfo(
+        uname=envinfo.pop(Key.UNAME),
+        py_implementation=envinfo.pop(Key.PYTHON_IMPLEMENTATION),
+        py_version=envinfo.pop(Key.PYTHON_VERSION),
+    )
+
+
 def _dumps_markdown(envinfo: Dict[str, str]) -> str:
     import pytablewriter as ptw
 
-    uname = envinfo.pop(Key.UNAME)
-    py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
-    py_version = envinfo.pop(Key.PYTHON_VERSION)
-
+    basic_envinfo = _pop_basic_envinfo(envinfo)
     matrix = [
-        [Key.UNAME, uname],
-        [f"{py_implementation}", py_version],
+        [Key.UNAME, basic_envinfo.uname],
+        [f"{basic_envinfo.py_implementation}", basic_envinfo.py_version],
     ] + [[key, value] for key, value in envinfo.items()]
     writer = ptw.MarkdownTableWriter(headers=["Module", "Version"], value_matrix=matrix, margin=1)
 
@@ -85,13 +94,10 @@ def dumps(
                     file=sys.stderr,
                 )
 
-    uname = envinfo.pop(Key.UNAME)
-    py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
-    py_version = envinfo.pop(Key.PYTHON_VERSION)
-
+    basic_envinfo = _pop_basic_envinfo(envinfo)
     lines = [
-        f"{Key.UNAME}: {uname}",
-        f"{py_implementation} version: {py_version}",
+        f"{Key.UNAME}: {basic_envinfo.uname}",
+        f"{basic_envinfo.py_implementation} version: {basic_envinfo.py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
