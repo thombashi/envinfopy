@@ -21,7 +21,7 @@ def parse_option() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
-        "-V", "--version", action="version", version="%(prog)s {}".format(__version__)
+        "-V", "--version", action="version", version=f"%(prog)s {__version__}"
     )
 
     parser.add_argument(

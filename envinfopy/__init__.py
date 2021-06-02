@@ -19,7 +19,7 @@ class Key:
 def get_envinfo(packages: Optional[Sequence[str]] = None) -> Dict[str, str]:
     uname = platform.uname()
     envinfo = {
-        Key.UNAME: "{} {} {} {}".format(uname.system, uname.node, uname.release, uname.machine),
+        Key.UNAME: f"{uname.system} {uname.node} {uname.release} {uname.machine}",
         Key.PYTHON_IMPLEMENTATION: platform.python_implementation(),
         Key.PYTHON_VERSION: platform.python_version(),
     }
@@ -45,10 +45,10 @@ def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None
     implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
     version = envinfo.pop(Key.PYTHON_VERSION)
 
-    lines = ["uname: {}".format(uname), "{} version: {}".format(implementation, version)]
-    lines.extend(["{} version: {}".format(key, value) for key, value in envinfo.items()])
+    lines = [f"uname: {uname}", f"{implementation} version: {version}"]
+    lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
     if format and format.strip().lower() == "markdown":
-        lines = ["- {}".format(line) for line in lines]
+        lines = [f"- {line}" for line in lines]
 
     return "\n".join(lines)
