@@ -39,11 +39,9 @@ def parse_option() -> argparse.Namespace:
 
 
 def main() -> None:
-    options = parse_option()
+    ns = parse_option()
 
-    print(
-        dumps(options.packages.split(","), options.format, verbosity_level=options.verbosity_level)
-    )
+    print(dumps(ns.packages, ns.format, verbosity_level=ns.verbosity_level))
 
 
 if __name__ == "__main__":
