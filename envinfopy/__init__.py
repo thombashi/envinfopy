@@ -19,6 +19,7 @@ BasicEnvInfo = namedtuple("BasicEnvInfo", "uname py_implementation py_version")
 class Key:
     UNAME = "uname"
     PLATFORM = "platform"
+    PYTHON = "Python"
     PYTHON_IMPLEMENTATION = "python_implementation"
     PYTHON_VERSION = "python_version"
 
@@ -86,7 +87,7 @@ def _dumps_markdown(envinfo: Dict[str, str]) -> str:
     basic_envinfo = _pop_basic_envinfo(envinfo)
     matrix = [
         [Key.UNAME, basic_envinfo.uname],
-        [f"{basic_envinfo.py_implementation}", basic_envinfo.py_version],
+        [Key.PYTHON, f"{basic_envinfo.py_implementation} {basic_envinfo.py_version}"],
     ] + [[key, value] for key, value in envinfo.items()]
     writer = ptw.MarkdownTableWriter(headers=["Module", "Version"], value_matrix=matrix, margin=1)
 
@@ -119,7 +120,7 @@ def dumps(
     basic_envinfo = _pop_basic_envinfo(envinfo)
     lines = [
         f"{Key.UNAME}: {basic_envinfo.uname}",
-        f"{basic_envinfo.py_implementation} version: {basic_envinfo.py_version}",
+        f"{Key.PYTHON} version: {basic_envinfo.py_implementation} {basic_envinfo.py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
