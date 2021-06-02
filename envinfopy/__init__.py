@@ -95,7 +95,14 @@ def _dumps_markdown(envinfo: Dict[str, str]) -> str:
 
 
 def _dumps_json(envinfo: Dict[str, str]) -> str:
-    return json.dumps(envinfo, indent=4)
+    basic_envinfo = _pop_basic_envinfo(envinfo)
+    outputs = {
+        Key.UNAME: basic_envinfo.uname,
+        Key.PYTHON: f"{basic_envinfo.py_implementation} {basic_envinfo.py_version}",
+    }
+    outputs.update(envinfo)
+
+    return json.dumps(outputs, indent=4)
 
 
 def dumps(
