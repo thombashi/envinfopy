@@ -46,7 +46,7 @@ def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None
     py_version = envinfo.pop(Key.PYTHON_VERSION)
 
     lines = [
-        f"uname: {uname}",
+        f"{Key.UNAME}: {uname}",
         f"{py_implementation} version: {py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
