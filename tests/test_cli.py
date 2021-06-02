@@ -14,7 +14,7 @@ class Test_cli:
         assert runner.returncode == 0
 
     def test_smoke(self, tmpdir):
-        runner = SubprocessRunner([sys.executable, "-m", "envinfopy", "--packages", "envinfopy"])
+        runner = SubprocessRunner([sys.executable, "-m", "envinfopy", "envinfopy", "envinfopy"])
         runner.run()
 
         print(runner.stdout)
