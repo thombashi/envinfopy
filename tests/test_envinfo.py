@@ -71,5 +71,5 @@ class Test_dumps:
         output_v2 = envinfopy.dumps(format=format, verbosity_level=2)
         print(f"{output_v1}\n\n{output_v2}\n{result_sep}", file=sys.stderr)
         assert len(output_v2) > 20
-        assert len(output_v2) > len(output_v1)
+        assert len(output_v2) >= len(output_v1)
         assert RE_VERSION.search(output_v2)
