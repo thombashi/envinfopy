@@ -32,7 +32,7 @@ Installation
 ============================================
 ::
 
-    pip install envinfopy
+    pip3 install envinfopy
 
 
 Usage
@@ -50,7 +50,7 @@ Get environment information as Markdown:
 
 ::
 
-    pip install envinfopy[all]  # install optional dependencies
+    pip3 install envinfopy[all]  # install optional dependencies
 
 .. code-block:: python
 
@@ -67,9 +67,9 @@ CLI usage
 --------------------------------------------
 ::
 
-    $ pip install envinfopy[all]  # install optional dependencies
+    $ pip3 install envinfopy[all]  # install optional dependencies
 
-    $ python -m envinfopy --packages envinfopy,setuptools --format markdown
+    $ python3 -m envinfopy envinfopy setuptools --format markdown
     |   Module   |              Version              |
     | ---------- | --------------------------------- |
     | uname      | Linux 4.19.104-microsoft-standard |
