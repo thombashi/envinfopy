@@ -66,6 +66,7 @@ setuptools.setup(
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
+        "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
         "License :: OSI Approved :: MIT License",
@@ -81,6 +82,7 @@ setuptools.setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Terminals",
     ],
     cmdclass=get_release_command_class(),
     zip_safe=False,
