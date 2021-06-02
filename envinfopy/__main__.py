@@ -24,9 +24,9 @@ def parse_option() -> argparse.Namespace:
     parser.add_argument("-v", "--verbose", dest="verbosity_level", action="count", default=1)
 
     parser.add_argument(
-        "--packages",
-        default="",
-        help="comma-separated packages that extract versions.",
+        "packages",
+        nargs="+",
+        help="packages to extract versions",
     )
     parser.add_argument(
         "--format",
