@@ -20,9 +20,7 @@ def parse_option() -> argparse.Namespace:
             """
         ),
     )
-    parser.add_argument(
-        "-V", "--version", action="version", version=f"%(prog)s {__version__}"
-    )
+    parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {__version__}")
 
     parser.add_argument(
         "--packages",

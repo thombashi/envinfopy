@@ -45,7 +45,10 @@ def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None
     implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
     version = envinfo.pop(Key.PYTHON_VERSION)
 
-    lines = [f"uname: {uname}", f"{implementation} version: {version}"]
+    lines = [
+        f"uname: {uname}",
+        f"{implementation} version: {version}",
+    ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
     if format and format.strip().lower() == "markdown":
