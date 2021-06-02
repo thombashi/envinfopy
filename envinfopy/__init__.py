@@ -28,7 +28,7 @@ def get_uname(verbosity_level: int = 0) -> str:
     if verbosity_level == 0:
         return f"{uname.system}"
     if verbosity_level == 1:
-        return f"{uname.system} {uname.machine}"
+        return f"{uname.system} {uname.release}"
 
     return f"{uname.system} {uname.release} {uname.machine}"
 
