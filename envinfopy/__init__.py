@@ -18,6 +18,7 @@ BasicEnvInfo = namedtuple("BasicEnvInfo", "uname py_implementation py_version")
 
 class Key:
     UNAME = "uname"
+    PLATFORM = "platform"
     PYTHON_IMPLEMENTATION = "python_implementation"
     PYTHON_VERSION = "python_version"
 
@@ -41,6 +42,20 @@ def get_envinfo(
         Key.PYTHON_IMPLEMENTATION: platform.python_implementation(),
         Key.PYTHON_VERSION: platform.python_version(),
     }
+
+    system = platform.system()
+    if system == "Windows":
+        envinfo[Key.PLATFORM] = " ".join(platform.win32_ver()[:3])
+    elif system == "Linux":
+        try:
+            from distro import linux_distribution
+
+            envinfo[Key.PLATFORM] = " ".join(linux_distribution()[:2])
+        except ImportError:
+            pass
+    elif system == "Darwin":
+        mac_ver = platform.mac_ver()
+        envinfo[Key.PLATFORM] = " ".join([mac_ver[0], mac_ver[2]])
 
     if not packages:
         return envinfo
