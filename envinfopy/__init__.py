@@ -44,15 +44,15 @@ def get_envinfo(
     }
 
     system = platform.system()
-    if system == "Windows":
-        envinfo[Key.PLATFORM] = " ".join(platform.win32_ver()[:3])
-    elif system == "Linux":
+    if system == "Linux":
         try:
             from distro import linux_distribution
 
             envinfo[Key.PLATFORM] = " ".join(linux_distribution()[:2])
         except ImportError:
             pass
+    elif system == "Windows":
+        envinfo[Key.PLATFORM] = " ".join(platform.win32_ver()[:3])
     elif system == "Darwin":
         mac_ver = platform.mac_ver()
         envinfo[Key.PLATFORM] = " ".join([mac_ver[0], mac_ver[2]])
