@@ -33,6 +33,9 @@ with open(os.path.join(REQUIREMENT_DIR, "requirements.txt")) as f:
 with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
     TESTS_REQUIRES = [line.strip() for line in f if line.strip()]
 
+
+cli_requires = ["pytablewriter>=0.59.0,<2"]
+
 setuptools.setup(
     name=MODULE_NAME,
     version=pkg_info["__version__"],
@@ -53,7 +56,10 @@ setuptools.setup(
     },
     python_requires=">=3.6",
     install_requires=INSTALL_REQUIRES,
-    extras_require={"test": TESTS_REQUIRES},
+    extras_require={
+        "cli": cli_requires,
+        "test": TESTS_REQUIRES,
+    },
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

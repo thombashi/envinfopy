@@ -39,8 +39,30 @@ def get_envinfo(packages: Optional[Sequence[str]] = None) -> Dict[str, str]:
     return envinfo
 
 
+def _dumps_markdown(envinfo: Dict[str, str]) -> str:
+    import pytablewriter as ptw
+
+    uname = envinfo.pop(Key.UNAME)
+    py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
+    py_version = envinfo.pop(Key.PYTHON_VERSION)
+
+    matrix = [
+        [Key.UNAME, uname],
+        [f"{py_implementation}", py_version],
+    ] + [[key, value] for key, value in envinfo.items()]
+    writer = ptw.MarkdownTableWriter(headers=["Module", "Version"], value_matrix=matrix, margin=1)
+
+    return writer.dumps()
+
+
 def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None) -> str:
     envinfo = get_envinfo(packages)
+
+    if format:
+        format_name = format.strip().lower()
+        if format_name == "markdown":
+            return _dumps_markdown(envinfo)
+
     uname = envinfo.pop(Key.UNAME)
     py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
     py_version = envinfo.pop(Key.PYTHON_VERSION)
@@ -50,8 +72,5 @@ def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None
         f"{py_implementation} version: {py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
-
-    if format and format.strip().lower() == "markdown":
-        lines = [f"- {line}" for line in lines]
 
     return "\n".join(lines)
