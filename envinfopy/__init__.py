@@ -3,6 +3,7 @@
 """
 
 import platform
+import sys
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
 
 import pkg_resources
@@ -75,7 +76,14 @@ def dumps(
     if format:
         format_name = format.strip().lower()
         if format_name == "markdown":
-            return _dumps_markdown(envinfo)
+            try:
+                return _dumps_markdown(envinfo)
+            except ImportError:
+                print(
+                    "required modules not installed. try to install dependencies with:\n"
+                    "    pip install envinfopy[markdown]\n",
+                    file=sys.stderr,
+                )
 
     uname = envinfo.pop(Key.UNAME)
     py_implementation = envinfo.pop(Key.PYTHON_IMPLEMENTATION)
