@@ -21,6 +21,7 @@ def parse_option() -> argparse.Namespace:
         ),
     )
     parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {__version__}")
+    parser.add_argument("-v", "--verbose", dest="verbosity_level", action="count", default=1)
 
     parser.add_argument(
         "--packages",
@@ -40,7 +41,9 @@ def parse_option() -> argparse.Namespace:
 def main() -> None:
     options = parse_option()
 
-    print(dumps(options.packages.split(","), options.format))
+    print(
+        dumps(options.packages.split(","), options.format, verbosity_level=options.verbosity_level)
+    )
 
 
 if __name__ == "__main__":

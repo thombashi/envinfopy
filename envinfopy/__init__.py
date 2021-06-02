@@ -16,10 +16,22 @@ class Key:
     PYTHON_VERSION = "python_version"
 
 
-def get_envinfo(packages: Optional[Sequence[str]] = None) -> Dict[str, str]:
+def get_uname(verbosity_level: int = 0) -> str:
     uname = platform.uname()
+
+    if verbosity_level == 0:
+        return f"{uname.system}"
+    if verbosity_level == 1:
+        return f"{uname.system} {uname.machine}"
+
+    return f"{uname.system} {uname.release} {uname.machine}"
+
+
+def get_envinfo(
+    packages: Optional[Sequence[str]] = None, verbosity_level: int = 0
+) -> Dict[str, str]:
     envinfo = {
-        Key.UNAME: f"{uname.system} {uname.node} {uname.release} {uname.machine}",
+        Key.UNAME: get_uname(verbosity_level),
         Key.PYTHON_IMPLEMENTATION: platform.python_implementation(),
         Key.PYTHON_VERSION: platform.python_version(),
     }
@@ -55,8 +67,10 @@ def _dumps_markdown(envinfo: Dict[str, str]) -> str:
     return writer.dumps()
 
 
-def dumps(packages: Optional[Sequence[str]] = None, format: Optional[str] = None) -> str:
-    envinfo = get_envinfo(packages)
+def dumps(
+    packages: Optional[Sequence[str]] = None, format: Optional[str] = None, verbosity_level: int = 0
+) -> str:
+    envinfo = get_envinfo(packages, verbosity_level=verbosity_level)
 
     if format:
         format_name = format.strip().lower()
