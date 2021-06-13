@@ -111,7 +111,8 @@ def dumps(
     envinfo = get_envinfo(packages, verbosity_level=verbosity_level)
 
     if format:
-        format_name = format.strip().lower()
+        format_name = format.strip().casefold()
+
         if format_name == "markdown":
             try:
                 return _dumps_markdown(envinfo)
