@@ -5,7 +5,7 @@
 import json
 import platform
 import sys
-from collections import namedtuple
+from collections import OrderedDict, namedtuple
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
 
 import pkg_resources
@@ -106,9 +106,17 @@ def _dumps_json(envinfo: Dict[str, str]) -> str:
 
 
 def dumps(
-    packages: Optional[Sequence[str]] = None, format: Optional[str] = None, verbosity_level: int = 0
+    packages: Optional[Sequence[str]] = None,
+    format: Optional[str] = None,
+    additional_envinfo: Optional[Mapping[str, str]] = None,
+    verbosity_level: int = 0,
 ) -> str:
-    envinfo = get_envinfo(packages, verbosity_level=verbosity_level)
+    envinfo: Dict[str, str] = OrderedDict()
+
+    if additional_envinfo is not None:
+        envinfo.update(additional_envinfo)
+
+    envinfo.update(get_envinfo(packages, verbosity_level=verbosity_level))
 
     format_name = ""
     if format:

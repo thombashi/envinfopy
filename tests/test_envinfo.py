@@ -87,3 +87,11 @@ class Test_dumps:
         print(f"[{lhs}]\n{lhs_text}\n\n[{rhs}]\n{rhs_text}")
 
         assert envinfopy.dumps(format=lhs) != envinfopy.dumps(format=rhs)
+
+    def test_smoke_additional_envinfo(self):
+        add_key = "hoge"
+        add_version = "1.2.3"
+
+        output = envinfopy.dumps(additional_envinfo={add_key: add_version})
+        assert re.search(add_key, output, re.MULTILINE)
+        assert re.search(re.escape(add_version), output, re.MULTILINE)
