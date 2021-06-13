@@ -17,9 +17,9 @@ Summary
     :target: https://pypi.org/project/envinfopy
     :alt: Supported Python implementations
 
-.. image:: https://github.com/thombashi/envinfopy/workflows/Tests/badge.svg
-    :target: https://github.com/thombashi/envinfopy/actions?query=workflow%3ATests
-    :alt: Linux/macOS/Windows CI status
+.. image:: https://github.com/thombashi/envinfopy/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/envinfopy/actions/workflows/lint_and_test.yml
+    :alt: CI status of Linux/macOS/Windows
 
 .. image:: https://coveralls.io/repos/github/thombashi/envinfopy/badge.svg?branch=master
     :target: https://coveralls.io/github/thombashi/envinfopy?branch=master
@@ -77,6 +77,24 @@ CLI usage
     | platform   | Ubuntu 18.04                      |
     | envinfopy  | 0.0.4                             |
     | setuptools | 57.0.0                            |
+
+Command help
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::
+
+    usage: __main__.py [-h] [-V] [-v] [--format {text,markdown,json,itemize}] packages [packages ...]
+
+    positional arguments:
+      packages              package names to extract versions
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -V, --version         show program's version number and exit
+      -v, --verbose
+      --format {text,markdown,json,itemize}
+                            output format
+
+    Issue tracker: https://github.com/thombashi/envinfopy/issues
 
 
 Dependencies
