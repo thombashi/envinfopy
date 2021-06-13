@@ -1,5 +1,6 @@
 import re
 import sys
+from itertools import combinations
 
 import pytest
 
@@ -74,3 +75,15 @@ class Test_dumps:
         assert len(output_v2) > 20
         assert len(output_v2) >= len(output_v1)
         assert RE_VERSION.search(output_v2)
+
+    @pytest.mark.parametrize(
+        ["lhs", "rhs"],
+        list(combinations(["text", "itemize", "markdown", "json"], 2)),
+    )
+    def test_smoke_format(self, lhs, rhs):
+        lhs_text = envinfopy.dumps(format=lhs)
+        rhs_text = envinfopy.dumps(format=rhs)
+
+        print(f"[{lhs}]\n{lhs_text}\n\n[{rhs}]\n{rhs_text}")
+
+        assert envinfopy.dumps(format=lhs) != envinfopy.dumps(format=rhs)
