@@ -26,7 +26,7 @@ def parse_option() -> argparse.Namespace:
     parser.add_argument(
         "packages",
         nargs="+",
-        help="packages to extract versions",
+        help="package names to extract versions",
     )
     parser.add_argument(
         "--format",
