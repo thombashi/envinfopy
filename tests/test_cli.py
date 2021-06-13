@@ -1,6 +1,7 @@
 import re
 import sys
 
+import pytest
 from subprocrunner import SubprocessRunner
 
 
@@ -13,12 +14,23 @@ class Test_cli:
         runner.run()
         assert runner.returncode == 0
 
-    def test_smoke(self, tmpdir):
-        runner = SubprocessRunner([sys.executable, "-m", "envinfopy", "envinfopy", "envinfopy"])
+    @pytest.mark.parametrize(
+        ["format"],
+        [
+            ["text"],
+            ["itemize"],
+            ["markdown"],
+            ["json"],
+        ],
+    )
+    def test_smoke(self, format):
+        runner = SubprocessRunner(
+            [sys.executable, "-m", "envinfopy", "--format", format, "pathvalidate", "envinfopy"]
+        )
         runner.run()
 
         print(runner.stdout)
 
         assert runner.returncode == 0
         assert RE_VERSION.search(runner.stdout)
-        assert re.search("envinfopy version:", runner.stdout, re.MULTILINE)
+        assert re.search("envinfopy", runner.stdout, re.MULTILINE)
