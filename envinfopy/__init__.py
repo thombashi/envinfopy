@@ -110,20 +110,21 @@ def dumps(
 ) -> str:
     envinfo = get_envinfo(packages, verbosity_level=verbosity_level)
 
+    format_name = ""
     if format:
         format_name = format.strip().casefold()
 
-        if format_name == "markdown":
-            try:
-                return _dumps_markdown(envinfo)
-            except ImportError:
-                print(
-                    "required modules not installed. try to install dependencies with:\n"
-                    "    pip install envinfopy[markdown]\n",
-                    file=sys.stderr,
-                )
-        elif format_name == "json":
-            return _dumps_json(envinfo)
+    if format_name == "markdown":
+        try:
+            return _dumps_markdown(envinfo)
+        except ImportError:
+            print(
+                "required modules not installed. try to install dependencies with:\n"
+                "    pip install envinfopy[markdown]\n",
+                file=sys.stderr,
+            )
+    elif format_name == "json":
+        return _dumps_json(envinfo)
 
     basic_envinfo = _pop_basic_envinfo(envinfo)
     lines = [
@@ -131,5 +132,8 @@ def dumps(
         f"{Key.PYTHON} version: {basic_envinfo.py_implementation} {basic_envinfo.py_version}",
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
+
+    if format_name == "itemize":
+        return "\n".join(f"- {line}" for line in lines)
 
     return "\n".join(lines)

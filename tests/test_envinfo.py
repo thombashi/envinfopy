@@ -51,6 +51,7 @@ class Test_dumps:
         ["format"],
         [
             ["text"],
+            ["itemize"],
             ["markdown"],
             ["json"],
         ],
