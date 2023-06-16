@@ -57,8 +57,7 @@ jobs:
             ${{ matrix.os }}-${{ matrix.python-version }}-pip-
 
       - name: Install dependencies
-        run: |
-          make setup
+        run: make setup-ci
 
       - name: Run tests
         run: |
