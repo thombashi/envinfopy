@@ -40,11 +40,22 @@ Usage
 
 Library usage
 --------------------------------------------
+
+Get execution environment information as a dictionary:
+
+.. code-block:: python
+
+    >>> import envinfopy
+    >>> envinfopy.get_envinfo()
+    {'uname': 'Linux', 'python_implementation': 'CPython', 'python_version': '3.11.4', 'platform': 'Ubuntu 22.04.2 LTS'}
+
+Get execution environment information and specific package version information:
+
 .. code-block:: python
 
     >>> import envinfopy
     >>> envinfopy.get_envinfo(["envinfopy"])
-    {'uname': 'Linux', 'python_implementation': 'CPython', 'python_version': '3.8.5', 'platform': 'Ubuntu 18.04', 'envinfopy': '0.0.4'}
+    {'uname': 'Linux', 'python_implementation': 'CPython', 'python_version': '3.11.4', 'platform': 'Ubuntu 22.04.2 LTS', 'envinfopy': '0.1.0'}
 
 Get environment information as Markdown:
 
@@ -56,12 +67,12 @@ Get environment information as Markdown:
 
     >>> import envinfopy
     >>> print(envinfopy.dumps(["envinfopy"], format="markdown"))
-    |  Module   |    Version    |
-    | --------- | ------------- |
-    | uname     | Linux         |
-    | Python    | CPython 3.8.5 |
-    | platform  | Ubuntu 18.04  |
-    | envinfopy | 0.0.4         |
+    |  Module   |      Version       |
+    | --------- | ------------------ |
+    | uname     | Linux              |
+    | Python    | CPython 3.11.4     |
+    | platform  | Ubuntu 22.04.2 LTS |
+    | envinfopy | 0.1.0              |
 
 CLI usage
 --------------------------------------------
@@ -70,13 +81,13 @@ CLI usage
     $ pip3 install envinfopy[all]  # install optional dependencies
 
     $ python3 -m envinfopy envinfopy setuptools --format markdown
-    |   Module   |              Version              |
-    | ---------- | --------------------------------- |
-    | uname      | Linux 4.19.104-microsoft-standard |
-    | Python     | CPython 3.8.5                     |
-    | platform   | Ubuntu 18.04                      |
-    | envinfopy  | 0.0.4                             |
-    | setuptools | 57.0.0                            |
+    |   Module   |                 Version                 |
+    | ---------- | --------------------------------------- |
+    | uname      | Linux 5.15.90.1-microsoft-standard-WSL2 |
+    | Python     | CPython 3.11.4                          |
+    | platform   | Ubuntu 22.04.2 LTS                      |
+    | envinfopy  | 0.0.7                                   |
+    | setuptools | 67.8.0                                  |
 
 Command help
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,9 +96,9 @@ Command help
     usage: __main__.py [-h] [-V] [-v] [--format {text,markdown,json,itemize}] packages [packages ...]
 
     positional arguments:
-      packages              package names to extract versions
+      packages              PyPI package names to extract versions
 
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       -V, --version         show program's version number and exit
       -v, --verbose
@@ -99,4 +110,4 @@ Command help
 
 Dependencies
 ============================================
-Python 3.6+
+Python 3.7+
