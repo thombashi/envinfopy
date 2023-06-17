@@ -13,6 +13,7 @@ from typing import Dict, Mapping, Optional, Sequence
 import pkg_resources
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
+from ._const import Key
 
 
 __all__ = (
@@ -29,14 +30,6 @@ __all__ = (
 
 
 BasicEnvInfo = namedtuple("BasicEnvInfo", "uname py_implementation py_version")
-
-
-class Key:
-    UNAME = "uname"
-    PLATFORM = "platform"
-    PYTHON = "Python"
-    PYTHON_IMPLEMENTATION = "python_implementation"
-    PYTHON_VERSION = "python_version"
 
 
 def get_uname(verbosity_level: int = 0) -> str:
