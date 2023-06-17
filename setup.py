@@ -35,8 +35,9 @@ with open(os.path.join(REQUIREMENT_DIR, "test_requirements.txt")) as f:
 
 
 markdown_requires = ["pytablewriter>=0.59.0,<2"]
+dev_requires = ["releasecmd>=0.9"]
 distro_requires = ["distro<2"]
-all_requires = markdown_requires + distro_requires
+all_requires = markdown_requires + dev_requires + distro_requires
 
 setuptools.setup(
     name=MODULE_NAME,
@@ -60,6 +61,7 @@ setuptools.setup(
     install_requires=INSTALL_REQUIRES,
     extras_require={
         "all": all_requires,
+        "dev": dev_requires,
         "distro": distro_requires,
         "markdown": markdown_requires,
         "test": set(TESTS_REQUIRES + all_requires),
