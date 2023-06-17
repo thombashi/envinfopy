@@ -74,10 +74,10 @@ def get_envinfo(
         Key.PYTHON_IMPLEMENTATION: platform.python_implementation(),
         Key.PYTHON_VERSION: platform.python_version(),
     }
+    envinfo[Key.PLATFORM] = _extract_platform()
+
     if not packages:
         return envinfo
-
-    envinfo[Key.PLATFORM] = _extract_platform()
 
     for pkg in packages:
         if not pkg:
