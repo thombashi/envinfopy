@@ -8,7 +8,7 @@ import platform
 import re
 import sys
 from collections import OrderedDict, namedtuple
-from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
+from typing import Dict, Mapping, Optional, Sequence
 
 import pkg_resources
 
