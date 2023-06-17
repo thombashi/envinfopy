@@ -32,7 +32,7 @@ Installation
 ============================================
 ::
 
-    pip3 install envinfopy
+    python3 -m pip install envinfopy
 
 
 Usage
@@ -61,7 +61,7 @@ Get environment information as Markdown:
 
 ::
 
-    pip3 install envinfopy[all]  # install optional dependencies
+    python3 -m pip install envinfopy[markdown]  # install optional dependencies
 
 .. code-block:: python
 
@@ -78,7 +78,7 @@ CLI usage
 --------------------------------------------
 ::
 
-    $ pip3 install envinfopy[all]  # install optional dependencies
+    $ python3 -m install envinfopy[cli]  # install optional dependencies
 
     $ python3 -m envinfopy envinfopy setuptools --format markdown
     |   Module   |                 Version                 |
@@ -93,7 +93,7 @@ Command help
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ::
 
-    usage: __main__.py [-h] [-V] [-v] [--format {text,markdown,json,itemize}] packages [packages ...]
+    usage: __main__.py [-h] [-V] [-v] [--format {text,markdown,md,json,itemize}] packages [packages ...]
 
     positional arguments:
       packages              PyPI package names to extract versions
@@ -102,7 +102,7 @@ Command help
       -h, --help            show this help message and exit
       -V, --version         show program's version number and exit
       -v, --verbose
-      --format {text,markdown,json,itemize}
+      --format {text,markdown,md,json,itemize}
                             output format
 
     Issue tracker: https://github.com/thombashi/envinfopy/issues
