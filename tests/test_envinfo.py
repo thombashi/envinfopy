@@ -33,6 +33,11 @@ class Test_get_envinfo:
         assert RE_VERSION.search(envinfo["pytest"])
         assert RE_VERSION.search(envinfo["envinfopy"])
 
+    def test_normal_no_packages(self):
+        envinfo = envinfopy.get_envinfo([""])
+
+        assert envinfo == envinfopy.get_envinfo()
+
     def test_abnormal_not_installed(self):
         envinfo = envinfopy.get_envinfo(["not-installed-pkg"])
         print(envinfo)
@@ -40,11 +45,6 @@ class Test_get_envinfo:
         assert len(envinfo["uname"]) > 0
         assert RE_VERSION.search(envinfo[Key.PYTHON_VERSION])
         assert envinfo["not-installed-pkg"] == "not installed"
-
-    def test_abnormal_empty(self):
-        envinfo = envinfopy.get_envinfo([""])
-
-        assert envinfo == envinfopy.get_envinfo()
 
 
 class Test_dumps:
