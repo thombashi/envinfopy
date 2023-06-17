@@ -13,7 +13,7 @@ from typing import Dict, Mapping, Optional, Sequence
 import pkg_resources
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
-from ._const import Key, OutputFormat
+from ._const import CGROUP_RPOC, Key, OutputFormat
 
 
 __all__ = (
@@ -72,6 +72,18 @@ def _extract_platform() -> str:
     return system
 
 
+def _check_docker() -> bool:
+    if not os.path.exists(CGROUP_RPOC):
+        return False
+
+    with open(CGROUP_RPOC) as f:
+        for line in f.readlines():
+            if "/docker/" in line:
+                return True
+
+    return False
+
+
 def get_envinfo(
     packages: Optional[Sequence[str]] = None, verbosity_level: int = 0
 ) -> Dict[str, str]:
@@ -81,6 +93,10 @@ def get_envinfo(
         Key.PYTHON_VERSION: platform.python_version(),
     }
     envinfo[Key.PLATFORM] = _extract_platform()
+
+    run_on_docker = _check_docker()
+    if run_on_docker:
+        envinfo[Key.RUN_ON_DOCKER] = str(run_on_docker)
 
     if not packages:
         return envinfo
