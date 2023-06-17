@@ -15,6 +15,19 @@ import pkg_resources
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 
 
+__all__ = (
+    "__author__",
+    "__copyright__",
+    "__email__",
+    "__license__",
+    "__version__",
+    "Key",
+    "get_envinfo",
+    "get_uname",
+    "dumps",
+)
+
+
 BasicEnvInfo = namedtuple("BasicEnvInfo", "uname py_implementation py_version")
 
 
