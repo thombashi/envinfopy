@@ -3,7 +3,9 @@
 """
 
 import json
+import os
 import platform
+import re
 import sys
 from collections import OrderedDict, namedtuple
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
@@ -35,6 +37,35 @@ def get_uname(verbosity_level: int = 0) -> str:
     return f"{uname.system} {uname.release} {uname.machine}"
 
 
+def _extract_platform() -> str:
+    OS_RELEASE_PATH = "/etc/os-release"
+    system = platform.system()
+
+    if system == "Linux":
+        if os.path.exists(OS_RELEASE_PATH):
+            with open(OS_RELEASE_PATH) as f:
+                for line in f.readlines():
+                    m = re.search(r"PRETTY_NAME=\"(.*)\"", line)
+                    if not m:
+                        continue
+
+                    return m.group(1)
+
+        try:
+            from distro import linux_distribution
+
+            return " ".join(linux_distribution()[:2])
+        except ImportError:
+            pass
+    elif system == "Windows":
+        return " ".join(platform.win32_ver()[:3])
+    elif system == "Darwin":
+        mac_ver = platform.mac_ver()
+        return " ".join([mac_ver[0], mac_ver[2]])
+
+    return system
+
+
 def get_envinfo(
     packages: Optional[Sequence[str]] = None, verbosity_level: int = 0
 ) -> Dict[str, str]:
@@ -43,23 +74,10 @@ def get_envinfo(
         Key.PYTHON_IMPLEMENTATION: platform.python_implementation(),
         Key.PYTHON_VERSION: platform.python_version(),
     }
-
-    system = platform.system()
-    if system == "Linux":
-        try:
-            from distro import linux_distribution
-
-            envinfo[Key.PLATFORM] = " ".join(linux_distribution()[:2])
-        except ImportError:
-            pass
-    elif system == "Windows":
-        envinfo[Key.PLATFORM] = " ".join(platform.win32_ver()[:3])
-    elif system == "Darwin":
-        mac_ver = platform.mac_ver()
-        envinfo[Key.PLATFORM] = " ".join([mac_ver[0], mac_ver[2]])
-
     if not packages:
         return envinfo
+
+    envinfo[Key.PLATFORM] = _extract_platform()
 
     for pkg in packages:
         if not pkg:
