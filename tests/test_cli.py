@@ -9,7 +9,7 @@ RE_VERSION = re.compile(r"[0-9]\.[0-9]+\.[0-9]+", re.MULTILINE)
 
 
 class Test_cli:
-    def test_help(self, tmpdir):
+    def test_help(self):
         runner = SubprocessRunner([sys.executable, "-m", "envinfopy", "-h"])
         runner.run()
         assert runner.returncode == 0
