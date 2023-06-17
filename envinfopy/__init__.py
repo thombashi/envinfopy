@@ -13,7 +13,7 @@ from typing import Dict, Mapping, Optional, Sequence
 import pkg_resources
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
-from ._const import Key
+from ._const import Key, OutputFormat
 
 
 __all__ = (
@@ -129,6 +129,24 @@ def _dumps_json(envinfo: Dict[str, str]) -> str:
     return json.dumps(outputs, indent=4)
 
 
+def _normalize_format(format: Optional[str]) -> OutputFormat:
+    if not format:
+        return OutputFormat.TEXT
+
+    format_name = format.strip().casefold()
+
+    if format_name in ["markdown", "md"]:
+        return OutputFormat.MARKDOWN
+    if format_name == "json":
+        return OutputFormat.JSON
+    if format_name == "itemize":
+        return OutputFormat.ITEMIZE
+    if format_name == "text":
+        return OutputFormat.TEXT
+
+    raise ValueError(f"unknown format: {format}")
+
+
 def dumps(
     packages: Optional[Sequence[str]] = None,
     format: Optional[str] = None,
@@ -142,11 +160,9 @@ def dumps(
 
     envinfo.update(get_envinfo(packages, verbosity_level=verbosity_level))
 
-    format_name = ""
-    if format:
-        format_name = format.strip().casefold()
+    output_format = _normalize_format(format)
 
-    if format_name == "markdown":
+    if output_format == OutputFormat.MARKDOWN:
         try:
             return _dumps_markdown(envinfo)
         except ImportError:
@@ -155,7 +171,7 @@ def dumps(
                 "    pip install envinfopy[markdown]\n",
                 file=sys.stderr,
             )
-    elif format_name == "json":
+    elif output_format == OutputFormat.JSON:
         return _dumps_json(envinfo)
 
     basic_envinfo = _pop_basic_envinfo(envinfo)
@@ -165,7 +181,7 @@ def dumps(
     ]
     lines.extend([f"{key} version: {value}" for key, value in envinfo.items()])
 
-    if format_name == "itemize":
+    if output_format == OutputFormat.ITEMIZE:
         return "\n".join(f"- {line}" for line in lines)
 
     return "\n".join(lines)

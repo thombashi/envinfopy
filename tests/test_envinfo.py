@@ -5,10 +5,37 @@ from itertools import combinations
 import pytest
 
 import envinfopy
-from envinfopy import Key
+from envinfopy import Key, _normalize_format
+from envinfopy._const import OutputFormat
 
 
 RE_VERSION = re.compile(r"[0-9]\.[0-9]+\.[0-9]+", re.MULTILINE)
+
+
+class Test_normalize_format:
+    @pytest.mark.parametrize(
+        ["format", "expected"],
+        [
+            ["", OutputFormat.TEXT],
+            ["markdown", OutputFormat.MARKDOWN],
+            ["markdown ", OutputFormat.MARKDOWN],
+            ["md", OutputFormat.MARKDOWN],
+            ["json", OutputFormat.JSON],
+            ["itemize", OutputFormat.ITEMIZE],
+        ],
+    )
+    def test_normal(self, format, expected):
+        assert _normalize_format(format) == expected
+
+    @pytest.mark.parametrize(
+        ["format"],
+        [
+            ["unknown"],
+        ],
+    )
+    def test_abnormal(self, format):
+        with pytest.raises(ValueError):
+            _normalize_format(format)
 
 
 class Test_get_uname:
