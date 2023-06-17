@@ -20,8 +20,8 @@ fmt:
 
 .PHONY: release
 release:
-	@$(PYTHON) setup.py release --sign --search-dir envinfopy
-	@make clean
+	$(PYTHON) setup.py release --verbose --search-dir envinfopy
+	$(MAKE) clean
 
 .PHONY: setup-ci
 setup-ci:
