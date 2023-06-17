@@ -24,7 +24,7 @@ def parse_option() -> argparse.Namespace:
     parser.add_argument(
         "packages",
         nargs="+",
-        help="package names to extract versions",
+        help="PyPI package names to extract versions",
     )
     parser.add_argument(
         "--format",
