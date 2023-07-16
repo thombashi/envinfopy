@@ -10,7 +10,11 @@ import sys
 from collections import OrderedDict, namedtuple
 from typing import Dict, Mapping, Optional, Sequence
 
-import pkg_resources
+
+try:
+    from importlib.metadata import PackageNotFoundError, version
+except ImportError:
+    from importlib_metadata import PackageNotFoundError, version
 
 from .__version__ import __author__, __copyright__, __email__, __license__, __version__
 from ._const import CGROUP_RPOC, Key, OutputFormat
@@ -106,8 +110,8 @@ def get_envinfo(
             continue
 
         try:
-            envinfo[pkg] = pkg_resources.get_distribution(pkg).version
-        except pkg_resources.DistributionNotFound:
+            envinfo[pkg] = version(pkg)
+        except PackageNotFoundError:
             envinfo[pkg] = "not installed"
 
     return envinfo
